@@ -1,0 +1,7 @@
+{
+  "name": "english-battle",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
