@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isHard ? '🔥 Hard Battle' : '📚 Vocab Battle' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="vocab-content">
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-label">SKOR</span>
+      <span class="stat-value">{{ score }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">NYAWA</span>
+      <span class="stat-value lives">
+        <span *ngFor="let i of [1,2,3]">
+          {{ i <= lives ? '❤️' : '🖤' }}
+        </span>
+      </span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">STREAK</span>
+      <span class="stat-value">🔥 {{ streak }}</span>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-wrap">
+    <ion-progress-bar [value]="progress" color="warning"></ion-progress-bar>
+    <p class="progress-text">{{ currentIndex + 1 }} / {{ words.length }}</p>
+  </div>
+
+  <!-- Word Card -->
+  <div class="word-card" *ngIf="!gameOver && currentWord">
+    <div class="word-type">{{ currentWord.type }}</div>
+    <h1 class="word-main">{{ currentWord.word }}</h1>
+    <p class="word-sentence">"{{ currentWord.sentence }}"</p>
+  </div>
+
+  <!-- Answer Options -->
+  <div class="options-grid" *ngIf="!gameOver && currentWord">
+    <button
+      class="option-btn"
+      *ngFor="let option of currentWord.options"
+      [class]="getOptionClass(option)"
+      (click)="selectAnswer(option)"
+      [disabled]="answered">
+      {{ option }}
+    </button>
+  </div>
+
+</ion-content>

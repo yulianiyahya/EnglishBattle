@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>🔗 Matching</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="matching-content">
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-label">SKOR</span>
+      <span class="stat-value">{{ score }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">MATCHED</span>
+      <span class="stat-value">{{ matchedPairs.length }}/{{ pairs.length }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">SALAH</span>
+      <span class="stat-value wrong">{{ mistakes }}</span>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <ion-progress-bar [value]="progress" color="success"></ion-progress-bar>
+    <p class="progress-text">{{ matchedPairs.length }} / {{ pairs.length }} pasangan</p>
+  </div>
+
+  <!-- Instruction -->
+  <div class="instruction">
+    <p>Pilih kata Inggris, lalu pasangkan dengan artinya!</p>
+  </div>
+
+  <!-- Matching Grid -->
+  <div class="matching-grid" *ngIf="!gameOver">
+    <!-- English Column -->
+    <div class="column">
+      <p class="col-title">🇬🇧 English</p>
+      <button
+        class="match-btn"
+        *ngFor="let word of englishWords"
+        [class]="getEnClass(word)"
+        (click)="selectEn(word)"
+        [disabled]="isMatched(word, 'en')">
+        {{ word }}
+      </button>
+    </div>
+
+    <!-- Indonesian Column -->
+    <div class="column">
+      <p class="col-title">🇮🇩 Indonesia</p>
+      <button
+        class="match-btn"
+        *ngFor="let word of indonesianWords"
+        [class]="getIdClass(word)"
+        (click)="selectId(word)"
+        [disabled]="isMatched(word, 'id')">
+        {{ word }}
+      </button>
+    </div>
+  </div>
+
+</ion-content>

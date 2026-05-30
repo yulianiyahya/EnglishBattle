@@ -1,0 +1,190 @@
+.result-content {
+  --background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.levelup-banner {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #1a1a2e;
+  text-align: center;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.result-hero {
+  text-align: center;
+  padding: 32px 16px 16px;
+
+  .result-emoji {
+    font-size: 72px;
+    margin-bottom: 12px;
+    animation: bounceIn 0.5s ease;
+  }
+
+  .result-message {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+    letter-spacing: 2px;
+
+    &.win {
+      color: #38ef7d;
+      text-shadow: 0 0 20px rgba(56, 239, 125, 0.5);
+    }
+
+    &.lose {
+      color: #ef473a;
+      text-shadow: 0 0 20px rgba(239, 71, 58, 0.5);
+    }
+  }
+
+  .mode-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.score-card {
+  margin: 0 16px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+
+  .score-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    .score-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .score-value {
+      font-size: 56px;
+      font-weight: 900;
+      color: #ffd200;
+      text-shadow: 0 0 20px rgba(255, 210, 0, 0.5);
+      line-height: 1;
+    }
+  }
+
+  .score-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 16px;
+  }
+
+  .score-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 16px;
+    gap: 8px;
+
+    .score-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+
+      .s-value {
+        font-size: 20px;
+        font-weight: 900;
+        color: #fff;
+
+        &.xp {
+          color: #38ef7d;
+        }
+      }
+
+      .s-label {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.player-card {
+  margin: 0 16px 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+
+  .player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    .player-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .player-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+
+      &.gold {
+        color: #ffd200;
+      }
+    }
+  }
+
+  .xp-progress {
+    margin-top: 12px;
+
+    .xp-hint {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      margin: 0 0 6px 0;
+    }
+
+    ion-progress-bar {
+      border-radius: 8px;
+      height: 6px;
+    }
+  }
+}
+
+.action-btns {
+  padding: 0 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  ion-button {
+    --border-radius: 14px;
+    height: 50px;
+    font-weight: 700;
+  }
+}

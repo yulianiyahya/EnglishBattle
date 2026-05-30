@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>📊 Hasil Game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="result-content">
+
+  <!-- Level Up Banner -->
+  <div class="levelup-banner" *ngIf="leveledUp">
+    🎉 LEVEL UP! Sekarang Level {{ player.level }}!
+  </div>
+
+  <!-- Result Hero -->
+  <div class="result-hero" *ngIf="result">
+    <div class="result-emoji">{{ resultEmoji }}</div>
+    <h1 class="result-message" [class.win]="result.isWin" [class.lose]="!result.isWin">
+      {{ resultMessage }}
+    </h1>
+    <p class="mode-label">{{ modeLabel }}</p>
+  </div>
+
+  <!-- Score Card -->
+  <div class="score-card" *ngIf="result">
+    <div class="score-main">
+      <span class="score-label">SKOR</span>
+      <span class="score-value">{{ result.score }}</span>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-stats">
+      <div class="score-stat">
+        <span class="s-value">{{ result.correctCount }}</span>
+        <span class="s-label">Benar</span>
+      </div>
+      <div class="score-stat">
+        <span class="s-value">{{ result.totalQuestions - result.correctCount }}</span>
+        <span class="s-label">Salah</span>
+      </div>
+      <div class="score-stat">
+        <span class="s-value">{{ accuracy }}%</span>
+        <span class="s-label">Akurasi</span>
+      </div>
+      <div class="score-stat">
+        <span class="s-value xp">+{{ result.xpGained }}</span>
+        <span class="s-label">XP</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Progress -->
+  <div class="player-card" *ngIf="player">
+    <div class="player-row">
+      <span class="player-label">Level</span>
+      <span class="player-value">{{ player.level }}</span>
+    </div>
+    <div class="player-row">
+      <span class="player-label">Total XP</span>
+      <span class="player-value">{{ player.xp }}</span>
+    </div>
+    <div class="player-row">
+      <span class="player-label">High Score</span>
+      <span class="player-value gold">{{ player.highScore }}</span>
+    </div>
+    <div class="player-row">
+      <span class="player-label">Games Played</span>
+      <span class="player-value">{{ player.totalGamesPlayed }}</span>
+    </div>
+    <div class="xp-progress">
+      <p class="xp-hint">XP menuju level berikutnya</p>
+      <ion-progress-bar
+        [value]="(player.xp % 100) / 100"
+        color="warning">
+      </ion-progress-bar>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-btns">
+    <ion-button expand="block" color="primary" (click)="playAgain()">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Main Lagi
+    </ion-button>
+    <ion-button expand="block" fill="outline" color="light" (click)="goHome()">
+      <ion-icon name="home-outline" slot="start"></ion-icon>
+      Kembali ke Home
+    </ion-button>
+  </div>
+
+</ion-content>

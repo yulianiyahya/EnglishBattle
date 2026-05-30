@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { WordBlastPageRoutingModule } from './word-blast-routing.module';
 
-import { HomePage } from './home.page';
+import { WordBlastPage } from './word-blast.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    WordBlastPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [WordBlastPage]
 })
-export class HomePageModule {}
+export class WordBlastPageModule {}

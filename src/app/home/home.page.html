@@ -1,20 +1,128 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>⚔️ English Battle</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="home-content">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Player Stats Card -->
+  <div class="stats-card" *ngIf="player">
+    <div class="level-badge">LV {{ player.level }}</div>
+    <div class="stats-info">
+      <p class="xp-text">XP: {{ player.xp }} | High Score: {{ player.highScore }}</p>
+      <ion-progress-bar [value]="xpProgress / 100" color="warning"></ion-progress-bar>
+      <p class="xp-hint">{{ xpProgress }}/100 XP menuju level berikutnya</p>
+    </div>
   </div>
+
+  <!-- Daily Streak Card -->
+  <div class="streak-card">
+    <div class="streak-left">
+      <span class="streak-emoji">{{ getStreakEmoji() }}</span>
+      <div class="streak-text">
+        <span class="streak-title">Daily Streak</span>
+        <span class="streak-msg">{{ getStreakMessage() }}</span>
+        <div class="streak-progress-row">
+          <ion-progress-bar [value]="getMilestoneProgress()" color="warning"></ion-progress-bar>
+          <span class="streak-next">🎯 {{ getNextMilestone() }} hari</span>
+        </div>
+      </div>
+    </div>
+    <div class="streak-right">
+      <span class="streak-number">{{ dailyStreak }}</span>
+      <span class="streak-unit">hari</span>
+    </div>
+  </div>
+
+  <!-- Streak Milestones -->
+  <div class="milestone-row">
+    <div class="milestone" [class.reached]="dailyStreak >= 3">
+      <span class="ms-icon">⚡</span>
+      <span class="ms-day">3</span>
+    </div>
+    <div class="milestone-line" [class.reached]="dailyStreak >= 7"></div>
+    <div class="milestone" [class.reached]="dailyStreak >= 7">
+      <span class="ms-icon">🔥</span>
+      <span class="ms-day">7</span>
+    </div>
+    <div class="milestone-line" [class.reached]="dailyStreak >= 14"></div>
+    <div class="milestone" [class.reached]="dailyStreak >= 14">
+      <span class="ms-icon">💎</span>
+      <span class="ms-day">14</span>
+    </div>
+    <div class="milestone-line" [class.reached]="dailyStreak >= 30"></div>
+    <div class="milestone" [class.reached]="dailyStreak >= 30">
+      <span class="ms-icon">👑</span>
+      <span class="ms-day">30</span>
+    </div>
+    <div class="milestone-line" [class.reached]="dailyStreak >= 60"></div>
+    <div class="milestone" [class.reached]="dailyStreak >= 60">
+      <span class="ms-icon">🌟</span>
+      <span class="ms-day">60</span>
+    </div>
+    <div class="milestone-line" [class.reached]="dailyStreak >= 100"></div>
+    <div class="milestone" [class.reached]="dailyStreak >= 100">
+      <span class="ms-icon">🏆</span>
+      <span class="ms-day">100</span>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="hero-section">
+    <h1 class="game-title">⚔️ ENGLISH<br>BATTLE</h1>
+    <p class="subtitle">Kuasai bahasa Inggris sambil bermain!</p>
+  </div>
+
+  <!-- Game Modes -->
+  <div class="modes-grid">
+
+    <ion-card class="mode-card easy" (click)="goTo('vocabulary')">
+      <ion-card-content>
+        <div class="mode-icon">📚</div>
+        <h2>Vocab Battle</h2>
+        <p>Easy Mode</p>
+        <ion-badge color="success">Semua Level</ion-badge>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mode-card blast" (click)="goTo('word-blast')">
+      <ion-card-content>
+        <div class="mode-icon">💥</div>
+        <h2>Word Blast</h2>
+        <p>Susun huruf acak!</p>
+        <ion-badge color="warning">Semua Level</ion-badge>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mode-card match" (click)="goTo('matching')">
+      <ion-card-content>
+        <div class="mode-icon">🔗</div>
+        <h2>Matching</h2>
+        <p>Pasangkan kata!</p>
+        <ion-badge color="tertiary">Semua Level</ion-badge>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="mode-card hard"
+      (click)="player.level >= 3 ? goTo('vocabulary-hard') : null"
+      [class.locked]="player.level < 3">
+      <ion-card-content>
+        <div class="mode-icon">{{ player.level >= 3 ? '🔥' : '🔒' }}</div>
+        <h2>Hard Battle</h2>
+        <p>{{ player.level >= 3 ? 'Advanced Mode' : 'Butuh Level 3' }}</p>
+        <ion-badge color="danger">Level 3+</ion-badge>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!-- Reset Button -->
+  <div class="reset-area">
+    <ion-button fill="outline" color="medium" size="small" (click)="resetProgress()">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Reset Progress
+    </ion-button>
+  </div>
+
 </ion-content>
