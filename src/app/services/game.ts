@@ -28,9 +28,4 @@ export class GameService {
     };
   }
 
-  calcStreakBonus(streak: number, basePoints: number): number {
-    if (streak >= 5) return basePoints * 3;
-    if (streak >= 3) return basePoints * 2;
-    return basePoints;
-  }
 }

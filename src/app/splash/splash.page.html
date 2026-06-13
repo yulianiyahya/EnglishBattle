@@ -1,0 +1,19 @@
+<ion-content class="splash-content">
+  <div class="splash-wrapper" [class.visible]="showContent">
+
+    <div class="logo-container">
+      <img src="assets/icon/logo.png" alt="English Battle" class="logo-img" />
+      <div class="glow-ring"></div>
+    </div>
+
+    <p class="splash-sub">Kuasai bahasa Inggris sambil bermain!</p>
+
+    <div class="loading-bar-wrapper">
+      <div class="loading-bar">
+        <div class="loading-fill" [style.width.%]="loadingProgress"></div>
+      </div>
+      <span class="loading-text">{{ loadingProgress }}%</span>
+    </div>
+
+  </div>
+</ion-content>

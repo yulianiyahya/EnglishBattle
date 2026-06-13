@@ -7,7 +7,7 @@
 <ion-content class="result-content">
 
   <!-- Level Up Banner -->
-  <div class="levelup-banner" *ngIf="leveledUp">
+  <div class="levelup-banner" *ngIf="leveledUp && player">
     🎉 LEVEL UP! Sekarang Level {{ player.level }}!
   </div>
 

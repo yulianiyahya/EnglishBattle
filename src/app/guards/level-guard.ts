@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { PlayerService } from '../services/player';
 
@@ -6,11 +6,9 @@ import { PlayerService } from '../services/player';
   providedIn: 'root'
 })
 export class LevelGuard implements CanActivate {
+  private playerService = inject(PlayerService);
+  private router = inject(Router);
 
-  constructor(
-    private playerService: PlayerService,
-    private router: Router
-  ) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const requiredLevel = route.data['requiredLevel'] || 1;

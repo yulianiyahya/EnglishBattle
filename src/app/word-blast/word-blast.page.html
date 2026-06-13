@@ -20,8 +20,8 @@
       <span class="stat-value">{{ timeLeft }}s</span>
     </div>
     <div class="stat-item">
-      <span class="stat-label">STREAK</span>
-      <span class="stat-value">🔥 {{ streak }}</span>
+      <span class="stat-label">SALAH</span>
+      <span class="stat-value wrong">{{ wrongCount }}</span>
     </div>
   </div>
 
@@ -43,12 +43,9 @@
     <div class="answer-slots">
       <div
         class="answer-slot"
-        *ngFor="let i of currentWord.word.split('')">
-        {{ selectedLetters[currentWord.word.indexOf(i)] || '_' }}
+        *ngFor="let letter of currentWord.word.split(''); let i = index">
+        {{ selectedLetters[i] || '_' }}
       </div>
-    </div>
-    <div class="answer-letters">
-      <span *ngFor="let l of selectedLetters" class="chosen-letter">{{ l }}</span>
     </div>
   </div>
 
@@ -66,12 +63,12 @@
 
   <!-- Action Buttons -->
   <div class="action-btns" *ngIf="!gameOver">
-    <ion-button fill="outline" color="warning" (click)="removeLast()">
+    <ion-button fill="outline" color="warning" (click)="removeLast()" [disabled]="answered">
       <ion-icon name="backspace-outline" slot="start"></ion-icon>
       Hapus
     </ion-button>
-    <ion-button fill="outline" color="danger" (click)="handleWrong()">
-      <ion-icon name="skip-forward-outline" slot="start"></ion-icon>
+    <ion-button fill="outline" color="danger" (click)="handleWrong()" [disabled]="answered">
+      <ion-icon name="play-forward-outline" slot="start"></ion-icon>
       Skip
     </ion-button>
   </div>

@@ -24,8 +24,8 @@
       </span>
     </div>
     <div class="stat-item">
-      <span class="stat-label">STREAK</span>
-      <span class="stat-value">🔥 {{ streak }}</span>
+      <span class="stat-label">SALAH</span>
+      <span class="stat-value wrong">{{ wrongCount }}</span>
     </div>
   </div>
 
@@ -46,12 +46,12 @@
   <div class="options-grid" *ngIf="!gameOver && currentWord">
     <button
       class="option-btn"
-      *ngFor="let option of currentWord.options"
+      *ngFor="let option of shuffledOptions"
       [class]="getOptionClass(option)"
       (click)="selectAnswer(option)"
       [disabled]="answered">
       {{ option }}
     </button>
-  </div>
+</div>
 
 </ion-content>

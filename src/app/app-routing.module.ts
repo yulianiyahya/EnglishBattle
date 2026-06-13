@@ -5,13 +5,18 @@ import { LevelGuard } from './guards/level-guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'splash',
     pathMatch: 'full'
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then(m => m.SplashPageModule)
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
+
   {
     path: 'vocabulary',
     loadChildren: () => import('./vocabulary/vocabulary.module').then(m => m.VocabularyPageModule)

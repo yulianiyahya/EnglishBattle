@@ -1,81 +1,131 @@
 import { Injectable } from '@angular/core';
 import { VocabWord, BlastWord, MatchPair } from '../models/word';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class VocabularyService {
 
-  private vocabEasy: VocabWord[] = [
-    { word: 'HAPPY', type: 'adjective', translation: 'senang', sentence: 'She was happy to see her friend.', options: ['senang', 'marah', 'lelah', 'takut'] },
-    { word: 'BEAUTIFUL', type: 'adjective', translation: 'cantik', sentence: 'What a beautiful sunset!', options: ['jelek', 'cantik', 'besar', 'kecil'] },
-    { word: 'WATER', type: 'noun', translation: 'air', sentence: 'Please drink more water.', options: ['api', 'air', 'angin', 'tanah'] },
-    { word: 'BRAVE', type: 'adjective', translation: 'berani', sentence: 'The brave knight fought the dragon.', options: ['berani', 'takut', 'malu', 'malas'] },
-    { word: 'DREAM', type: 'noun', translation: 'mimpi', sentence: 'Follow your dream.', options: ['mimpi', 'cerita', 'lagu', 'gambar'] },
-    { word: 'FAMILY', type: 'noun', translation: 'keluarga', sentence: 'Family is everything.', options: ['teman', 'keluarga', 'tetangga', 'orang'] },
-    { word: 'STRONG', type: 'adjective', translation: 'kuat', sentence: 'He is a very strong man.', options: ['lemah', 'cepat', 'kuat', 'lambat'] },
-    { word: 'FRIEND', type: 'noun', translation: 'teman', sentence: 'She is my best friend.', options: ['musuh', 'teman', 'saudara', 'guru'] },
-    { word: 'SLEEP', type: 'verb', translation: 'tidur', sentence: 'I need to sleep early tonight.', options: ['makan', 'berlari', 'tidur', 'bermain'] },
-    { word: 'LIGHT', type: 'noun', translation: 'cahaya', sentence: 'The light was too bright.', options: ['gelap', 'cahaya', 'bayangan', 'malam'] },
+  private easyWords: VocabWord[] = [
+    { word: 'Apple', translation: 'Apel', type: 'NOUN', sentence: 'I eat an apple every day.', options: ['Apel', 'Jeruk', 'Mangga', 'Pisang'] },
+    { word: 'Book', translation: 'Buku', type: 'NOUN', sentence: 'She reads a book before sleep.', options: ['Pensil', 'Buku', 'Meja', 'Kursi'] },
+    { word: 'Happy', translation: 'Bahagia', type: 'ADJ', sentence: 'I am very happy today.', options: ['Sedih', 'Marah', 'Bahagia', 'Takut'] },
+    { word: 'Run', translation: 'Berlari', type: 'VERB', sentence: 'He likes to run in the morning.', options: ['Berlari', 'Berjalan', 'Melompat', 'Berenang'] },
+    { word: 'Beautiful', translation: 'Cantik', type: 'ADJ', sentence: 'The flower is beautiful.', options: ['Jelek', 'Cantik', 'Besar', 'Kecil'] },
+    { word: 'Water', translation: 'Air', type: 'NOUN', sentence: 'Please drink more water.', options: ['Api', 'Tanah', 'Air', 'Angin'] },
+    { word: 'Sleep', translation: 'Tidur', type: 'VERB', sentence: 'I sleep at 10 PM every night.', options: ['Makan', 'Minum', 'Tidur', 'Bermain'] },
+    { word: 'Friend', translation: 'Teman', type: 'NOUN', sentence: 'She is my best friend.', options: ['Musuh', 'Teman', 'Guru', 'Dokter'] },
+    { word: 'School', translation: 'Sekolah', type: 'NOUN', sentence: 'I go to school every Monday.', options: ['Rumah', 'Kantor', 'Sekolah', 'Pasar'] },
+    { word: 'Eat', translation: 'Makan', type: 'VERB', sentence: 'We eat together at lunch.', options: ['Minum', 'Makan', 'Tidur', 'Berlari'] },
+    { word: 'House', translation: 'Rumah', type: 'NOUN', sentence: 'My house is near the park.', options: ['Rumah', 'Gedung', 'Hotel', 'Toko'] },
+    { word: 'Cat', translation: 'Kucing', type: 'NOUN', sentence: 'The cat is sleeping on the sofa.', options: ['Anjing', 'Kucing', 'Burung', 'Ikan'] },
+    { word: 'Big', translation: 'Besar', type: 'ADJ', sentence: 'That is a very big elephant.', options: ['Kecil', 'Besar', 'Tinggi', 'Pendek'] },
+    { word: 'Fast', translation: 'Cepat', type: 'ADJ', sentence: 'The cheetah is very fast.', options: ['Lambat', 'Cepat', 'Kuat', 'Lemah'] },
+    { word: 'Love', translation: 'Cinta', type: 'VERB', sentence: 'I love my family very much.', options: ['Benci', 'Cinta', 'Takut', 'Marah'] },
+    { word: 'Sun', translation: 'Matahari', type: 'NOUN', sentence: 'The sun rises in the east.', options: ['Bulan', 'Bintang', 'Matahari', 'Awan'] },
+    { word: 'Dog', translation: 'Anjing', type: 'NOUN', sentence: 'My dog loves to play fetch.', options: ['Kucing', 'Anjing', 'Kelinci', 'Hamster'] },
+    { word: 'Cold', translation: 'Dingin', type: 'ADJ', sentence: 'The weather is very cold today.', options: ['Panas', 'Hangat', 'Dingin', 'Sejuk'] },
+    { word: 'Walk', translation: 'Berjalan', type: 'VERB', sentence: 'I walk to school every day.', options: ['Berlari', 'Berjalan', 'Terbang', 'Berenang'] },
+    { word: 'Night', translation: 'Malam', type: 'NOUN', sentence: 'The stars shine at night.', options: ['Pagi', 'Siang', 'Sore', 'Malam'] },
   ];
 
-  private vocabHard: VocabWord[] = [
-    { word: 'RESILIENCE', type: 'noun', translation: 'ketangguhan', sentence: 'Her resilience helped her overcome challenges.', options: ['ketangguhan', 'kepedulian', 'kebaikan', 'ketakutan'] },
-    { word: 'ELOQUENT', type: 'adjective', translation: 'fasih', sentence: 'He gave an eloquent speech.', options: ['fasih', 'bisu', 'kasar', 'malu'] },
-    { word: 'AMBIGUOUS', type: 'adjective', translation: 'ambigu', sentence: 'The message was ambiguous.', options: ['ambigu', 'jelas', 'pasti', 'langsung'] },
-    { word: 'PERSEVERE', type: 'verb', translation: 'bertekun', sentence: 'You must persevere to succeed.', options: ['bertekun', 'menyerah', 'menunggu', 'berlomba'] },
-    { word: 'DILIGENT', type: 'adjective', translation: 'tekun', sentence: 'She is a very diligent student.', options: ['tekun', 'malas', 'pintar', 'baik'] },
-    { word: 'AMBITIOUS', type: 'adjective', translation: 'ambisius', sentence: 'He is very ambitious about his career.', options: ['ambisius', 'sederhana', 'rendah hati', 'pemalas'] },
-    { word: 'SINCERE', type: 'adjective', translation: 'tulus', sentence: 'Her apology was sincere.', options: ['tulus', 'palsu', 'kasar', 'dingin'] },
-    { word: 'EMPATHY', type: 'noun', translation: 'empati', sentence: 'Show empathy to others.', options: ['empati', 'amarah', 'kebencian', 'ketakutan'] },
-    { word: 'PROFOUND', type: 'adjective', translation: 'mendalam', sentence: 'He has a profound understanding of art.', options: ['mendalam', 'dangkal', 'biasa', 'ringan'] },
-    { word: 'MAGNIFICENT', type: 'adjective', translation: 'megah', sentence: 'The palace was magnificent.', options: ['megah', 'biasa', 'kecil', 'sederhana'] },
+  private hardWords: VocabWord[] = [
+    { word: 'Ambiguous', translation: 'Ambigu', type: 'ADJ', sentence: 'The instruction was ambiguous and confusing.', options: ['Jelas', 'Ambigu', 'Tepat', 'Pasti'] },
+    { word: 'Persevere', translation: 'Bertekun', type: 'VERB', sentence: 'You must persevere to achieve your goals.', options: ['Menyerah', 'Bertekun', 'Berhenti', 'Mundur'] },
+    { word: 'Eloquent', translation: 'Fasih', type: 'ADJ', sentence: 'She gave an eloquent speech at the ceremony.', options: ['Gagap', 'Fasih', 'Bisu', 'Kasar'] },
+    { word: 'Resilient', translation: 'Tangguh', type: 'ADJ', sentence: 'Children are more resilient than we think.', options: ['Lemah', 'Tangguh', 'Rapuh', 'Kaku'] },
+    { word: 'Innovate', translation: 'Berinovasi', type: 'VERB', sentence: 'Companies must innovate to stay competitive.', options: ['Meniru', 'Berinovasi', 'Mundur', 'Berhenti'] },
+    { word: 'Humble', translation: 'Rendah Hati', type: 'ADJ', sentence: 'Despite his success, he remained humble.', options: ['Sombong', 'Rendah Hati', 'Angkuh', 'Egois'] },
+    { word: 'Dedicate', translation: 'Mendedikasikan', type: 'VERB', sentence: 'She dedicated her life to helping others.', options: ['Mengabaikan', 'Mendedikasikan', 'Meninggalkan', 'Melupakan'] },
+    { word: 'Profound', translation: 'Mendalam', type: 'ADJ', sentence: 'The book had a profound impact on me.', options: ['Dangkal', 'Mendalam', 'Biasa', 'Ringan'] },
+    { word: 'Collaborate', translation: 'Berkolaborasi', type: 'VERB', sentence: 'We need to collaborate to finish this project.', options: ['Bersaing', 'Berkolaborasi', 'Bertengkar', 'Berpisah'] },
+    { word: 'Integrity', translation: 'Integritas', type: 'NOUN', sentence: 'A leader must have integrity above all.', options: ['Korupsi', 'Integritas', 'Kebohongan', 'Kelicikan'] },
+    { word: 'Spontaneous', translation: 'Spontan', type: 'ADJ', sentence: 'Her spontaneous laugh made everyone smile.', options: ['Terencana', 'Spontan', 'Dibuat-buat', 'Formal'] },
+    { word: 'Empathy', translation: 'Empati', type: 'NOUN', sentence: 'Empathy is key to understanding others.', options: ['Egois', 'Empati', 'Antipati', 'Apatis'] },
+    { word: 'Meticulous', translation: 'Teliti', type: 'ADJ', sentence: 'He was meticulous in cleaning the laboratory equipment.', options: ['Ceroboh', 'Teliti', 'Malas', 'Cepat'] },
+    { word: 'Obsolete', translation: 'Usang', type: 'ADJ', sentence: 'Gas lamps became obsolete after the invention of electric lights.', options: ['Baru', 'Modern', 'Usang', 'Canggih'] },
+    { word: 'Pragmatic', translation: 'Pragmatis', type: 'ADJ', sentence: 'We need a pragmatic approach to solve this issue.', options: ['Teoretis', 'Pragmatis', 'Khayalan', 'Ideal'] },
+    { word: 'Scrutinize', translation: 'Menyelidiki', type: 'VERB', sentence: 'Customers were warned to scrutinize the small print of the contract.', options: ['Mengabaikan', 'Menyelidiki', 'Membiarkan', 'Melupakan'] },
+    { word: 'Superfluous', translation: 'Berlebihan', type: 'ADJ', sentence: 'The report was filled with superfluous details.', options: ['Penting', 'Kurang', 'Berlebihan', 'Cukup'] },
+    { word: 'Vulnerable', translation: 'Rentan', type: 'ADJ', sentence: 'Old people are vulnerable to the flu.', options: ['Kuat', 'Aman', 'Kebal', 'Rentan'] },
+    { word: 'Anomalous', translation: 'Ganjil', type: 'ADJ', sentence: 'The scientists observed an anomalous test result.', options: ['Normal', 'Ganjil', 'Biasa', 'Sesuai'] },
+    { word: 'Benevolent', translation: 'Murah Hati', type: 'ADJ', sentence: 'A benevolent uncle paid for her college tuition.', options: ['Kikir', 'Kejam', 'Murah Hati', 'Sombong'] },
   ];
 
   private blastWords: BlastWord[] = [
-    { word: 'WATER', translation: 'air', hint: 'Cair, untuk minum' },
-    { word: 'DREAM', translation: 'mimpi', hint: 'Terjadi saat tidur' },
-    { word: 'BRAVE', translation: 'berani', hint: 'Tidak takut' },
-    { word: 'HAPPY', translation: 'senang', hint: 'Perasaan gembira' },
-    { word: 'LIGHT', translation: 'cahaya', hint: 'Dari matahari atau lampu' },
-    { word: 'TRUST', translation: 'percaya', hint: 'Yakin pada seseorang' },
-    { word: 'SMILE', translation: 'senyum', hint: 'Ekspresi wajah positif' },
-    { word: 'HOUSE', translation: 'rumah', hint: 'Tempat tinggal' },
+    { word: 'CAT', translation: 'Kucing', hint: 'Hewan peliharaan yang suka mengeong' },
+    { word: 'DOG', translation: 'Anjing', hint: 'Sahabat setia manusia' },
+    { word: 'SUN', translation: 'Matahari', hint: 'Bintang yang bersinar di siang hari' },
+    { word: 'BOOK', translation: 'Buku', hint: 'Tempat ilmu pengetahuan tersimpan' },
+    { word: 'RAIN', translation: 'Hujan', hint: 'Air yang turun dari langit' },
+    { word: 'TREE', translation: 'Pohon', hint: 'Tumbuhan besar yang punya akar dan ranting' },
+    { word: 'FISH', translation: 'Ikan', hint: 'Hewan yang hidup di air' },
+    { word: 'STAR', translation: 'Bintang', hint: 'Cahaya yang bersinar di malam hari' },
+    { word: 'MOON', translation: 'Bulan', hint: 'Satelit bumi yang bersinar malam' },
+    { word: 'FIRE', translation: 'Api', hint: 'Panas dan bercahaya, bisa membakar' },
+    { word: 'WIND', translation: 'Angin', hint: 'Udara yang bergerak dan bisa kamu rasakan' },
+    { word: 'BIRD', translation: 'Burung', hint: 'Hewan bersayap yang bisa terbang' },
+    { word: 'LOVE', translation: 'Cinta', hint: 'Perasaan sayang yang dalam' },
+    { word: 'GOLD', translation: 'Emas', hint: 'Logam mulia berwarna kuning' },
+    { word: 'JUMP', translation: 'Melompat', hint: 'Gerakan naik ke atas dengan kedua kaki' },
+    { word: 'PLAY', translation: 'Bermain', hint: 'Kegiatan yang menyenangkan' },
+    { word: 'SING', translation: 'Bernyanyi', hint: 'Mengeluarkan suara mengikuti melodi' },
+    { word: 'CAKE', translation: 'Kue', hint: 'Makanan manis yang sering ada di ulang tahun' },
+    { word: 'BLUE', translation: 'Biru', hint: 'Warna langit dan laut' },
+    { word: 'FAST', translation: 'Cepat', hint: 'Berlawanan dengan lambat' },
   ];
 
   private matchSets: MatchPair[][] = [
     [
-      { en: 'HAPPY', id: 'Senang' },
-      { en: 'FRIEND', id: 'Teman' },
-      { en: 'WATER', id: 'Air' },
-      { en: 'BRAVE', id: 'Berani' },
-      { en: 'DREAM', id: 'Mimpi' },
-      { en: 'FAMILY', id: 'Keluarga' },
+      { en: 'Apple', id: 'Apel' },
+      { en: 'Water', id: 'Air' },
+      { en: 'Happy', id: 'Bahagia' },
+      { en: 'Run', id: 'Berlari' },
+      { en: 'Sleep', id: 'Tidur' },
+      { en: 'Friend', id: 'Teman' },
     ],
     [
-      { en: 'STRONG', id: 'Kuat' },
-      { en: 'LIGHT', id: 'Cahaya' },
-      { en: 'SLEEP', id: 'Tidur' },
-      { en: 'TRUST', id: 'Percaya' },
-      { en: 'SMILE', id: 'Senyum' },
-      { en: 'JOURNEY', id: 'Perjalanan' },
+      { en: 'Sun', id: 'Matahari' },
+      { en: 'Moon', id: 'Bulan' },
+      { en: 'Star', id: 'Bintang' },
+      { en: 'Fire', id: 'Api' },
+      { en: 'Wind', id: 'Angin' },
+      { en: 'Rain', id: 'Hujan' },
+    ],
+    [
+      { en: 'Love', id: 'Cinta' },
+      { en: 'Fast', id: 'Cepat' },
+      { en: 'Big', id: 'Besar' },
+      { en: 'Cold', id: 'Dingin' },
+      { en: 'Walk', id: 'Berjalan' },
+      { en: 'Night', id: 'Malam' },
+    ],
+    [
+      { en: 'Humble', id: 'Rendah Hati' },
+      { en: 'Resilient', id: 'Tangguh' },
+      { en: 'Empathy', id: 'Empati' },
+      { en: 'Integrity', id: 'Integritas' },
+      { en: 'Eloquent', id: 'Fasih' },
+      { en: 'Profound', id: 'Mendalam' },
     ],
   ];
 
   getVocabEasy(): VocabWord[] {
-    return [...this.vocabEasy].sort(() => Math.random() - 0.5).slice(0, 10);
+    return this.shuffle([...this.easyWords]).slice(0, 10);
   }
 
   getVocabHard(): VocabWord[] {
-    return [...this.vocabHard].sort(() => Math.random() - 0.5).slice(0, 10);
+    return this.shuffle([...this.hardWords]).slice(0, 10);
   }
 
   getBlastWords(): BlastWord[] {
-    return [...this.blastWords].sort(() => Math.random() - 0.5).slice(0, 6);
+    return this.shuffle([...this.blastWords]).slice(0, 10);
   }
 
   getMatchSet(): MatchPair[] {
-    const idx = Math.floor(Math.random() * this.matchSets.length);
-    return this.matchSets[idx];
+    const sets = this.shuffle([...this.matchSets]);
+    return sets[0];
+  }
+
+  private shuffle<T>(arr: T[]): T[] {
+    return arr.sort(() => Math.random() - 0.5);
   }
 }
